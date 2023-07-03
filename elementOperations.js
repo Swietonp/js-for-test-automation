@@ -24,17 +24,17 @@ function getMostRightElement(elements) {
   // Function for choosing the most right element by xpath
   function getMostRightElementByXpath(xpath) {
     const xpathResult = document.evaluate(xpath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-  
+
     let mostRightElement = null;
-    let mostRightXPosition = -Infinity;
+    let mostRightCenterX = -Infinity;
   
     for (let i = 0; i < xpathResult.snapshotLength; i++) {
       const element = xpathResult.snapshotItem(i);
       const elementRect = element.getBoundingClientRect();
-      const elementRightX = elementRect.right;
+      const elementCenterX = elementRect.left + elementRect.width / 2;
   
-      if (elementRightX > mostRightXPosition) {
-        mostRightXPosition = elementRightX;
+      if (elementCenterX > mostRightCenterX) {
+        mostRightCenterX = elementCenterX;
         mostRightElement = element;
       }
     }
